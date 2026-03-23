@@ -1,0 +1,14 @@
+artifact_uri: file:///D:/REGRESSION_ML_ENDTOEND/mlruns/284859539427613953/dd2927cab7024ab39ef4278e12a77ead/artifacts
+end_time: 1774288998808
+entry_point_name: ''
+experiment_id: '284859539427613953'
+lifecycle_stage: active
+run_id: dd2927cab7024ab39ef4278e12a77ead
+run_name: indecisive-loon-115
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1774288917449
+status: 3
+tags: []
+user_id: saada

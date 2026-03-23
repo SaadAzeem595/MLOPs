@@ -1,0 +1,7 @@
+artifact_location: file:///D:/REGRESSION_ML_ENDTOEND/mlruns/284859539427613953
+creation_time: 1774288916907
+experiment_id: '284859539427613953'
+last_update_time: 1774288916907
+lifecycle_stage: active
+name: xgboost_optuna_housing
+workspace: default
