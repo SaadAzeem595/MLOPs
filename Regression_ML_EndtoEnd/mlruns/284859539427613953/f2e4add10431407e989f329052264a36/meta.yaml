@@ -1,0 +1,14 @@
+artifact_uri: file:///D:/REGRESSION_ML_ENDTOEND/mlruns/284859539427613953/f2e4add10431407e989f329052264a36/artifacts
+end_time: 1774292246678
+entry_point_name: ''
+experiment_id: '284859539427613953'
+lifecycle_stage: active
+run_id: f2e4add10431407e989f329052264a36
+run_name: debonair-crow-623
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1774292176531
+status: 3
+tags: []
+user_id: saada

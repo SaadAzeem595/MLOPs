@@ -1,0 +1,14 @@
+artifact_uri: file:///D:/REGRESSION_ML_ENDTOEND/mlruns/284859539427613953/f299f41bd9b64e30b2c281f53f1fe297/artifacts
+end_time: 1774289063716
+entry_point_name: ''
+experiment_id: '284859539427613953'
+lifecycle_stage: active
+run_id: f299f41bd9b64e30b2c281f53f1fe297
+run_name: calm-mouse-619
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1774289043735
+status: 3
+tags: []
+user_id: saada

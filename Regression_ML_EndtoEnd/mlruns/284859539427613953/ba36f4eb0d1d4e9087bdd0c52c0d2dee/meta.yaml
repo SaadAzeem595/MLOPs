@@ -1,0 +1,14 @@
+artifact_uri: file:///D:/REGRESSION_ML_ENDTOEND/mlruns/284859539427613953/ba36f4eb0d1d4e9087bdd0c52c0d2dee/artifacts
+end_time: 1774292588312
+entry_point_name: ''
+experiment_id: '284859539427613953'
+lifecycle_stage: active
+run_id: ba36f4eb0d1d4e9087bdd0c52c0d2dee
+run_name: awesome-wolf-191
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1774292442476
+status: 3
+tags: []
+user_id: saada

@@ -1,0 +1,14 @@
+artifact_uri: file:///D:/REGRESSION_ML_ENDTOEND/mlruns/284859539427613953/ff4a5205d73d4b7e8fe18144d977490a/artifacts
+end_time: 1774292888312
+entry_point_name: ''
+experiment_id: '284859539427613953'
+lifecycle_stage: active
+run_id: ff4a5205d73d4b7e8fe18144d977490a
+run_name: skittish-shark-139
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1774292797970
+status: 3
+tags: []
+user_id: saada

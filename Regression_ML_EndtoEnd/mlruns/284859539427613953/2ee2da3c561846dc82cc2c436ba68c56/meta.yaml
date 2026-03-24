@@ -1,0 +1,14 @@
+artifact_uri: file:///D:/REGRESSION_ML_ENDTOEND/mlruns/284859539427613953/2ee2da3c561846dc82cc2c436ba68c56/artifacts
+end_time: 1774289155956
+entry_point_name: ''
+experiment_id: '284859539427613953'
+lifecycle_stage: active
+run_id: 2ee2da3c561846dc82cc2c436ba68c56
+run_name: bustling-snipe-29
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1774289106458
+status: 3
+tags: []
+user_id: saada

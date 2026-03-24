@@ -1,0 +1,14 @@
+artifact_uri: file:///D:/REGRESSION_ML_ENDTOEND/mlruns/284859539427613953/115fe6d510ce4ba19111f6321e5760fc/artifacts
+end_time: 1774292313145
+entry_point_name: ''
+experiment_id: '284859539427613953'
+lifecycle_stage: active
+run_id: 115fe6d510ce4ba19111f6321e5760fc
+run_name: resilient-conch-661
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1774292280167
+status: 3
+tags: []
+user_id: saada

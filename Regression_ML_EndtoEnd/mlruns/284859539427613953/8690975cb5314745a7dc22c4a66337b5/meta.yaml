@@ -1,0 +1,14 @@
+artifact_uri: file:///D:/REGRESSION_ML_ENDTOEND/mlruns/284859539427613953/8690975cb5314745a7dc22c4a66337b5/artifacts
+end_time: 1774292647152
+entry_point_name: ''
+experiment_id: '284859539427613953'
+lifecycle_stage: active
+run_id: 8690975cb5314745a7dc22c4a66337b5
+run_name: peaceful-snail-975
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1774292588357
+status: 3
+tags: []
+user_id: saada

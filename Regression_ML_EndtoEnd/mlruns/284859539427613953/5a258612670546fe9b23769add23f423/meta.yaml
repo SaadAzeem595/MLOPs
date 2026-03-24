@@ -1,0 +1,14 @@
+artifact_uri: file:///D:/REGRESSION_ML_ENDTOEND/mlruns/284859539427613953/5a258612670546fe9b23769add23f423/artifacts
+end_time: 1774290690150
+entry_point_name: ''
+experiment_id: '284859539427613953'
+lifecycle_stage: active
+run_id: 5a258612670546fe9b23769add23f423
+run_name: best_xgboost_model
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1774290614494
+status: 3
+tags: []
+user_id: saada

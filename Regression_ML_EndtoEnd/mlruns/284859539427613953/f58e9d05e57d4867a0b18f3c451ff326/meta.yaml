@@ -1,0 +1,14 @@
+artifact_uri: file:///D:/REGRESSION_ML_ENDTOEND/mlruns/284859539427613953/f58e9d05e57d4867a0b18f3c451ff326/artifacts
+end_time: 1774292797756
+entry_point_name: ''
+experiment_id: '284859539427613953'
+lifecycle_stage: active
+run_id: f58e9d05e57d4867a0b18f3c451ff326
+run_name: judicious-deer-662
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1774292696267
+status: 3
+tags: []
+user_id: saada

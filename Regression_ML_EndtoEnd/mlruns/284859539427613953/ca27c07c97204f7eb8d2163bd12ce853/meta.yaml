@@ -1,0 +1,14 @@
+artifact_uri: file:///D:/REGRESSION_ML_ENDTOEND/mlruns/284859539427613953/ca27c07c97204f7eb8d2163bd12ce853/artifacts
+end_time: 1774289251951
+entry_point_name: ''
+experiment_id: '284859539427613953'
+lifecycle_stage: active
+run_id: ca27c07c97204f7eb8d2163bd12ce853
+run_name: funny-crab-580
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1774289212232
+status: 3
+tags: []
+user_id: saada

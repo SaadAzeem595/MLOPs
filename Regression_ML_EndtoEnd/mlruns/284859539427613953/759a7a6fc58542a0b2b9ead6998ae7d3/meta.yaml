@@ -1,0 +1,14 @@
+artifact_uri: file:///D:/REGRESSION_ML_ENDTOEND/mlruns/284859539427613953/759a7a6fc58542a0b2b9ead6998ae7d3/artifacts
+end_time: 1774292696237
+entry_point_name: ''
+experiment_id: '284859539427613953'
+lifecycle_stage: active
+run_id: 759a7a6fc58542a0b2b9ead6998ae7d3
+run_name: judicious-ant-645
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1774292647195
+status: 3
+tags: []
+user_id: saada
