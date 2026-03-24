@@ -20,9 +20,9 @@ from xgboost import XGBRegressor
 import mlflow
 import mlflow.xgboost
 
-DEFAULT_TRAIN = Path("data/processed/feature_engineered_train.csv")
-DEFAULT_EVAL = Path("data/processed/feature_engineered_eval.csv")
-DEFAULT_OUT = Path("models/xgb_best_model.pkl")
+DEFAULT_TRAIN = Path(r"D:\REGRESSION_ML_ENDTOEND\Regression_ML_EndtoEnd\data\processed\feature_engineered_train.csv")
+DEFAULT_EVAL = Path(r"D:\REGRESSION_ML_ENDTOEND\Regression_ML_EndtoEnd\data\processed\feature_engineered_eval.csv")
+DEFAULT_OUT = Path(r"D:\REGRESSION_ML_ENDTOEND\Regression_ML_EndtoEnd\models\xgb_best_model.pkl")
 
 
 def _maybe_sample(df: pd.DataFrame, sample_frac: Optional[float], random_state: int) -> pd.DataFrame:
@@ -63,7 +63,7 @@ def tune_model(
 ) -> Tuple[Dict, Dict]:
     """Run Optuna tuning; save best model; return (best_params, best_metrics)."""
     if tracking_uri:
-        mlflow.set_tracking_uri(tracking_uri)
+        mlflow.set_tracking_uri(f"file:///{tracking_uri}")
     mlflow.set_experiment(experiment_name)
 
     X_train, y_train, X_eval, y_eval = _load_data(train_path, eval_path, sample_frac, random_state)
@@ -107,6 +107,10 @@ def tune_model(
     # Retrain best model
     best_model = XGBRegressor(**{**best_params, "random_state": random_state, "n_jobs": -1, "tree_method": "hist"})
     best_model.fit(X_train, y_train)
+
+    # ✅ Fix MLflow logging error
+    best_model._estimator_type = "regressor"
+
     y_pred = best_model.predict(X_eval)
     best_metrics = {
         "rmse": float(np.sqrt(mean_squared_error(y_eval, y_pred))),
@@ -115,7 +119,7 @@ def tune_model(
     }
     print("📊 Best tuned model metrics:", best_metrics)
 
-    # Save to models/
+    # Save model locally
     out = Path(model_output)
     out.parent.mkdir(parents=True, exist_ok=True)
     dump(best_model, out)

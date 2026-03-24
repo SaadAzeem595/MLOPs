@@ -16,9 +16,9 @@ from joblib import dump
 from sklearn.metrics import mean_absolute_error, mean_squared_error, r2_score
 from xgboost import XGBRegressor
 
-DEFAULT_TRAIN = Path("data/processed/feature_engineered_train.csv")
-DEFAULT_EVAL = Path("data/processed/feature_engineered_eval.csv")
-DEFAULT_OUT = Path("models/xgb_model.pkl")
+DEFAULT_TRAIN = Path(r"D:\REGRESSION_ML_ENDTOEND\Regression_ML_EndtoEnd\data\processed\feature_engineered_train.csv")
+DEFAULT_EVAL = Path(r"D:\REGRESSION_ML_ENDTOEND\Regression_ML_EndtoEnd\data\processed\feature_engineered_eval.csv")
+DEFAULT_OUT = Path(r"D:\REGRESSION_ML_ENDTOEND\Regression_ML_EndtoEnd\models\xgb_model.pkl")
 
 
 def _maybe_sample(df: pd.DataFrame, sample_frac: Optional[float], random_state: int) -> pd.DataFrame:

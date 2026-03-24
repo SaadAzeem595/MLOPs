@@ -12,8 +12,9 @@ import pandas as pd
 from category_encoders import TargetEncoder
 from joblib import dump #joblib.dump saves encoders/mappings to disk (important for reusing at inference).
 
-PROCESSED_DIR = Path("data/processed")
-MODELS_DIR = Path("models")
+# Change these lines at the top of your file:
+PROCESSED_DIR = Path(r"D:\REGRESSION_ML_ENDTOEND\Regression_ML_EndtoEnd\data\processed")
+MODELS_DIR = Path(r"D:\REGRESSION_ML_ENDTOEND\Regression_ML_EndtoEnd\models")
 MODELS_DIR.mkdir(parents=True, exist_ok=True)
 
 
@@ -89,50 +90,48 @@ def run_feature_engineering(
 
     train_df = pd.read_csv(in_train_path)
     eval_df = pd.read_csv(in_eval_path)
-    holdout_df = pd.read_csv(in_holdout_path)
+    # holdout_df = pd.read_csv(in_holdout_path)
 
     print("Train date range:", train_df["date"].min(), "to", train_df["date"].max())
     print("Eval date range:", eval_df["date"].min(), "to", eval_df["date"].max())
-    print("Holdout date range:", holdout_df["date"].min(), "to", holdout_df["date"].max())
+    # print("Holdout date range:", holdout_df["date"].min(), "to", holdout_df["date"].max())
 
     # Date features
     train_df = add_date_features(train_df)
     eval_df = add_date_features(eval_df)
-    holdout_df = add_date_features(holdout_df)
+    # holdout_df = add_date_features(holdout_df)
 
     # Frequency encode zipcode (fit on train only)
     freq_map = None
     if "zipcode" in train_df.columns:
         train_df, eval_df, freq_map = frequency_encode(train_df, eval_df, "zipcode")
-        holdout_df["zipcode_freq"] = holdout_df["zipcode"].map(freq_map).fillna(0)
         dump(freq_map, MODELS_DIR / "freq_encoder.pkl")   # save mapping
 
     # Target encode city_full (fit on train only)
     target_encoder = None
     if "city_full" in train_df.columns:
         train_df, eval_df, target_encoder = target_encode(train_df, eval_df, "city_full", "price")
-        holdout_df["city_full_encoded"] = target_encoder.transform(holdout_df["city_full"])
         dump(target_encoder, MODELS_DIR / "target_encoder.pkl")  # save encoder
 
     # Drop leakage / raw categoricals
     train_df, eval_df = drop_unused_columns(train_df, eval_df)
-    holdout_df, _ = drop_unused_columns(holdout_df.copy(), holdout_df.copy())
+    # holdout_df, _ = drop_unused_columns(holdout_df.copy(), holdout_df.copy())
 
     # Save engineered data
     out_train_path = output_dir / "feature_engineered_train.csv"
     out_eval_path = output_dir / "feature_engineered_eval.csv"
-    out_holdout_path = output_dir / "feature_engineered_holdout.csv"
+    # out_holdout_path = output_dir / "feature_engineered_holdout.csv"
     train_df.to_csv(out_train_path, index=False)
     eval_df.to_csv(out_eval_path, index=False)
-    holdout_df.to_csv(out_holdout_path, index=False)
+    # holdout_df.to_csv(out_holdout_path, index=False)
 
     print("✅ Feature engineering complete.")
     print("   Train shape:", train_df.shape)
     print("   Eval  shape:", eval_df.shape)
-    print("   Holdout shape:", holdout_df.shape)
+    # print("   Holdout shape:", holdout_df.shape)
     print("   Encoders saved to models/")
 
-    return train_df, eval_df, holdout_df, freq_map, target_encoder
+    return train_df, eval_df, freq_map, target_encoder # holdout_df
 
 
 if __name__ == "__main__":

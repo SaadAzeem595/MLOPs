@@ -21,8 +21,8 @@ import re
 from pathlib import Path
 import pandas as pd
 
-RAW_DIR = Path("data/raw")
-PROCESSED_DIR = Path("data/processed")
+RAW_DIR = Path(r"D:\REGRESSION_ML_ENDTOEND\Regression_ML_EndtoEnd\data\raw")
+PROCESSED_DIR = Path(r"D:\REGRESSION_ML_ENDTOEND\Regression_ML_EndtoEnd\data\processed")
 PROCESSED_DIR.mkdir(parents=True, exist_ok=True)
 
 # Manual fixes for known mismatches (normalized form)
@@ -48,7 +48,7 @@ def normalize_city(s: str) -> str:
     return s
 
 
-def clean_and_merge(df: pd.DataFrame, metros_path: str | None = "data/raw/usmetros.csv") -> pd.DataFrame:
+def clean_and_merge(df: pd.DataFrame, metros_path: str | None = r"D:\REGRESSION_ML_ENDTOEND\Regression_ML_EndtoEnd\data\raw\usmetros.csv") -> pd.DataFrame:
     """
     Normalize city names, optionally merge lat/lng from metros dataset.
     If `city_full` column or `metros_path` is missing, skip gracefully.
@@ -118,7 +118,7 @@ def preprocess_split(
     split: str,
     raw_dir: Path | str = RAW_DIR,
     processed_dir: Path | str = PROCESSED_DIR,
-    metros_path: str | None = "data/raw/usmetros.csv",
+    metros_path: str | None = r"D:\REGRESSION_ML_ENDTOEND\Regression_ML_EndtoEnd\data\raw\usmetros.csv",
 ) -> pd.DataFrame:
     """Run preprocessing for a split and save to processed_dir."""
     raw_dir = Path(raw_dir)
@@ -142,11 +142,14 @@ def run_preprocess(
     splits: tuple[str, ...] = ("train", "eval", "holdout"),
     raw_dir: Path | str = RAW_DIR,
     processed_dir: Path | str = PROCESSED_DIR,
-    metros_path: str | None = "data/raw/usmetros.csv",
+    metros_path: str | None = r"D:\REGRESSION_ML_ENDTOEND\Regression_ML_EndtoEnd\data\raw\usmetros.csv",
 ):
     for s in splits:
+        path = Path(raw_dir) / f"{s}.csv"
+        if not path.exists():
+            print(f"⚠️ Skipping {s}: file {path} not found.")
+            continue
         preprocess_split(s, raw_dir=raw_dir, processed_dir=processed_dir, metros_path=metros_path)
-
 
 if __name__ == "__main__":
     run_preprocess()

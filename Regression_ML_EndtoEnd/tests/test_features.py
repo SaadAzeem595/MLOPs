@@ -1,6 +1,13 @@
 import pandas as pd
 import pytest
 from pathlib import Path
+import sys
+from pathlib import Path
+
+# Ensure the project root is in sys.path so `src` can be found
+ROOT = Path(__file__).resolve().parents[1]  # Regression_ML_EndtoEnd
+if str(ROOT) not in sys.path:
+    sys.path.append(str(ROOT))
 
 from src.feature_pipeline.load import load_and_split_data
 from src.feature_pipeline.preprocess import (
@@ -24,12 +31,11 @@ def test_load_and_split_data_creates_splits(tmp_path):
     })
     df.to_csv(dummy_path, index=False)
 
-    train, eval, holdout = load_and_split_data(raw_path=str(dummy_path), output_dir=tmp_path)
+    train, eval = load_and_split_data(raw_path=str(dummy_path), output_dir=tmp_path)
 
-    assert not train.empty and not eval.empty and not holdout.empty
+    assert not train.empty and not eval.empty
     assert train["date"].max() < pd.to_datetime("2020-01-01")
     assert eval["date"].min() >= pd.to_datetime("2020-01-01")
-    assert holdout["date"].min() >= pd.to_datetime("2022-01-01")
     assert (tmp_path / "train.csv").exists()
     print("✅ Data splitting test passed")
 
@@ -37,7 +43,6 @@ def test_load_and_split_data_creates_splits(tmp_path):
 # =========================
 # preprocess.py – unit tests
 # =========================
-# Confirms preprocessing functions behave as intended.
 def test_remove_outliers_drops_high_prices():
     df = pd.DataFrame({"median_list_price": [100_000, 500_000, 20_000_000]})
     cleaned = remove_outliers(df)
@@ -58,7 +63,7 @@ def test_drop_duplicates_removes_dupes():
 
 def test_clean_and_merge_skips_when_city_missing():
     df = pd.DataFrame({"date": ["2020-01-01"], "price": [100]})
-    result = clean_and_merge(df, metros_path=None)  # should skip gracefully
+    result = clean_and_merge(df, metros_path=None)
     assert "date" in result.columns and "price" in result.columns
     print("✅ Clean-and-merge (no city_full) passed")
 
@@ -66,7 +71,6 @@ def test_clean_and_merge_skips_when_city_missing():
 # =========================
 # feature_engineering – unit tests
 # =========================
-# Confirms feature functions create consistent numeric features and avoid leakage.
 def test_add_date_features_extracts_parts():
     df = pd.DataFrame({"date": ["2020-01-15"]})
     df = add_date_features(df)
@@ -108,9 +112,8 @@ def test_drop_unused_columns_removes_leakage():
 
 
 # =========================
-# integration test
+# integration test – updated
 # =========================
-# Confirms the whole feature pipeline works together.
 def test_full_pipeline_integration(tmp_path):
     raw = pd.DataFrame({
         "date": pd.date_range("2018-01-01", periods=6, freq="365D"),
@@ -122,7 +125,7 @@ def test_full_pipeline_integration(tmp_path):
     raw_path = tmp_path / "raw.csv"
     raw.to_csv(raw_path, index=False)
 
-    train, eval, holdout = load_and_split_data(raw_path=str(raw_path), output_dir=tmp_path)
+    train, eval = load_and_split_data(raw_path=str(raw_path), output_dir=tmp_path)
 
     processed_dir = tmp_path / "processed"
     processed_dir.mkdir(exist_ok=True)
@@ -132,15 +135,16 @@ def test_full_pipeline_integration(tmp_path):
     preprocess_split("train", raw_dir=tmp_path, processed_dir=processed_dir, metros_path=None)
     preprocess_split("eval", raw_dir=tmp_path, processed_dir=processed_dir, metros_path=None)
 
-    out_train, out_eval, out_holdout, freq_map, te = run_feature_engineering(
+    out_train, out_eval, freq_map, te = run_feature_engineering(
         in_train_path=processed_dir / "cleaning_train.csv",
         in_eval_path=processed_dir / "cleaning_eval.csv",
         output_dir=processed_dir,
     )
 
-
-    assert {"year", "zipcode_freq", "city_full_encoded"}.issubset(out_train.columns)
-    assert {"year", "zipcode_freq", "city_full_encoded"}.issubset(out_eval.columns)
+    # Ensure important engineered columns exist
+    expected_cols = {"year", "zipcode_freq", "city_full_encoded"}
+    assert expected_cols.issubset(out_train.columns)
+    assert expected_cols.issubset(out_eval.columns)
     assert freq_map is not None
     assert te is not None
     print("✅ Full pipeline integration test passed")
